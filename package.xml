@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package>
+	<displayName>RightsService</displayName>
+	<shortDescription>A set of class to manage the rights of users in web-application. You should use this package
+	if you want to restrict access to some parts of your web-application to some users only (for instance
+	if you want to make an "admin" section that is only accessible to the adminsitrator).</shortDescription>
+	<docUrl></docUrl>
+	<doc>
+		<page title="Using the Rights Service" url="rightsservice_package.html" />
+	</doc>		
+	<logo>logo.png</logo>
+	<dependencies>
+		<dependency>
+			<group>security</group>
+			<name>userservice</name>
+			<version>>=1.0</version>
+		</dependency>
+		<dependency>
+			<group>utils/common</group>
+			<name>conditioninterface</name>
+			<version>>=1.0</version>
+		</dependency>
+	</dependencies>
+	<requires>
+		<require>RightInterface.php</require>
+		<require>RightsDaoInterface.php</require>
+		<require>MoufRight.php</require>
+		<require>RightsServiceInterface.php</require>
+		<require>MoufRightService.php</require>
+		<require>SimpleRightCondition.php</require>
+	</requires>
+	<adminRequires>
+		<require>MoufRightServiceValidators.php</require>
+	</adminRequires>	
+
+</package>
