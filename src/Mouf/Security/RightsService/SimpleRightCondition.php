@@ -1,6 +1,9 @@
 <?php
 namespace Mouf\Security\RightsService;
 
+use Mouf\Utils\Common\ConditionInterface\ConditionInterface;
+
+
 /**
  * This class represents a simple right condition.
  * The condition is true if the current user has the appropriate right, and is false if the current

@@ -1,5 +1,9 @@
 <?php
 namespace Mouf\Security\RightsService;
+use Mouf\Security\UserService\UserServiceInterface;
+
+use Mouf\Security\UserService\AuthenticationListenerInterface;
+
 
 /**
  * This class can be used to decide whether a user (or the current user) has the rights to do an action.
