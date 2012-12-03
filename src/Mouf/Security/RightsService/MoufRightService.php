@@ -1,8 +1,12 @@
 <?php
 namespace Mouf\Security\RightsService;
+use Mouf\Utils\Log\LogInterface;
+
 use Mouf\Security\UserService\UserServiceInterface;
 
 use Mouf\Security\UserService\AuthenticationListenerInterface;
+
+
 
 
 /**
