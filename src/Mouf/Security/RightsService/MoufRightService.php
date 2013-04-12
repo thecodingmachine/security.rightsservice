@@ -1,5 +1,9 @@
 <?php
 namespace Mouf\Security\RightsService;
+use Mouf\Validator\MoufValidatorInterface;
+
+use Mouf\Validator\MoufStaticValidatorInterface;
+
 use Mouf\MoufManager;
 
 use Mouf\Validator\MoufValidatorResult;
@@ -23,7 +27,7 @@ use Mouf\Security\UserService\AuthenticationListenerInterface;
  *
  * @Component
  */
-class MoufRightService implements RightsServiceInterface, AuthenticationListenerInterface, MoufStaticValidatorInterface {
+class MoufRightService implements RightsServiceInterface, AuthenticationListenerInterface, MoufStaticValidatorInterface, MoufValidatorInterface {
 
 	private static $RIGHTS_SESSION_NAME="MoufRights";
 	
@@ -238,5 +242,18 @@ If you plan to use the RightsService package, it is usually a good idea to creat
 		}		
 	}
 	
+	/**
+	 * Runs the validation of the instance.
+	 * Returns a MoufValidatorResult explaining the result.
+	 *
+	 * @return MoufValidatorResult
+	 */
+	public function validateInstance() {
+		if ($this->rightsDao == null) {
+			return new MoufValidatorResult(MoufValidatorResult::ERROR, "You must associate a rightsDao to the rightsService.");
+		} else {
+			return new MoufValidatorResult(MoufValidatorResult::SUCCESS, "rightsDao found in rightsService.");
+		}
+	}
 }
 ?>
