@@ -20,5 +20,18 @@
         "psr-0": {
             "Mouf": "src/"
         }
+    },
+    "extra": {
+    	"mouf": {
+	    	"install": [
+	    		{
+	    			"type": "file",
+	    			"file": "src/install.php"
+	    		}
+	    	],
+    		"require-admin": [
+    			"src/MoufRightServiceValidators.php"
+    		]
+    	}
     }
 }
