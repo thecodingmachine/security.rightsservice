@@ -1,5 +1,9 @@
 <?php
 namespace Mouf\Security\RightsService;
+use Mouf\MoufManager;
+
+use Mouf\Validator\MoufValidatorResult;
+
 use Mouf\Utils\Log\LogInterface;
 
 use Mouf\Security\UserService\UserServiceInterface;
@@ -19,7 +23,7 @@ use Mouf\Security\UserService\AuthenticationListenerInterface;
  *
  * @Component
  */
-class MoufRightService implements RightsServiceInterface, AuthenticationListenerInterface {
+class MoufRightService implements RightsServiceInterface, AuthenticationListenerInterface, MoufStaticValidatorInterface {
 
 	private static $RIGHTS_SESSION_NAME="MoufRights";
 	
@@ -215,5 +219,24 @@ class MoufRightService implements RightsServiceInterface, AuthenticationListener
 			exit;
 		}
 	}
+	
+	/**
+	 * Runs the validation of the class.
+	 * Returns a MoufValidatorResult explaining the result.
+	 *
+	 * @return MoufValidatorResult
+	 */
+	public static function validateClass() {
+		
+		$instanceExists = MoufManager::getMoufManager()->instanceExists('rightsService');
+		
+		if ($instanceExists) {
+			return new MoufValidatorResult(MoufValidatorResult::SUCCESS, "'rightsService' instance found.");
+		} else {
+			return new MoufValidatorResult(MoufValidatorResult::WARN, "Unable to find the 'rightsService' instance.
+If you plan to use the RightsService package, it is usually a good idea to create an instance of the MoufRightService class (or a subclass) named 'rightsService'. Click here to <a href='".ROOT_URL."mouf/newInstance2?instanceName=rightsService&instanceClass=Mouf\\Security\\RightsService\\MoufRightService&selfedit=".$selfedit."'>create an instance of the MoufRightService class named 'rightsService'</a>.");
+		}		
+	}
+	
 }
 ?>
