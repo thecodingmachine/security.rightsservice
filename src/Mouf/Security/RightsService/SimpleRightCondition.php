@@ -23,7 +23,7 @@ class SimpleRightCondition implements ConditionInterface {
 	 * This property is the service that will be used to decide the rights of the user.
 	 *
 	 * @Property
-	 * @param RightsServiceInterface $right
+	 * @param RightsServiceInterface $rightsService
 	 */
 	public function setRightsService(RightsServiceInterface $rightsService) {
 		$this->rightsService = $rightsService;
