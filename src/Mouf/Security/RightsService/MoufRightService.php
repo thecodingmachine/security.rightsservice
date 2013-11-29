@@ -39,6 +39,13 @@ class MoufRightService implements RightsServiceInterface, AuthenticationListener
 	 * @var UserServiceInterface
 	 */
 	public $userService;
+        
+        
+        /**
+         * 
+         * @var \Mouf\Utils\Action\ActionInterface[]
+         */
+        public $onNotUserAllowedAction;
 	
 	/**
 	 * The Dao that will return all rights for a user.
@@ -139,7 +146,7 @@ class MoufRightService implements RightsServiceInterface, AuthenticationListener
 		// First, a user must be logged.
 		
 		if (!$this->userService->isLogged()) {
-			return false;
+                    return false;
 		}
 		
 		if (!isset($_SESSION[$this->sessionPrefix.self::$RIGHTS_SESSION_NAME])) {			
@@ -155,6 +162,12 @@ class MoufRightService implements RightsServiceInterface, AuthenticationListener
 		}
 		return false;
 	}
+        
+        private function runNotAllowedAction(){
+            foreach($this->onNotUserAllowedAction as $action){
+                $action->run();
+            }
+        }
 	
 	/**
 	 * Returns true if the user whose id is $user_id has the $right.
@@ -214,6 +227,7 @@ class MoufRightService implements RightsServiceInterface, AuthenticationListener
 	 */
 	public function redirectNotAuthorized($right, $scope = null) {
 		if (!$this->isAllowed($right, $scope)) {
+                        $this->runNotAllowedAction();
 			if ($scope == null) {
 				$this->log->info("User ".$this->userService->getUserLogin()." was denied access because he does not have the right ".$right.".");
 			} else {
