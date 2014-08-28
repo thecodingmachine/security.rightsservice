@@ -45,7 +45,7 @@ class MoufRightService implements RightsServiceInterface, AuthenticationListener
          * 
          * @var \Mouf\Utils\Action\ActionInterface[]
          */
-        public $onNotUserAllowedAction;
+        public $onNotUserAllowedAction = array();
 	
 	/**
 	 * The Dao that will return all rights for a user.
