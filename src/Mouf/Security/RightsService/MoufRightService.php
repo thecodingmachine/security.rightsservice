@@ -41,11 +41,11 @@ class MoufRightService implements RightsServiceInterface, AuthenticationListener
 	public $userService;
         
         
-        /**
-         * 
-         * @var \Mouf\Utils\Action\ActionInterface[]
-         */
-        public $onNotUserAllowedAction = array();
+    /**
+     *
+     * @var \Mouf\Utils\Action\ActionInterface[]
+     */
+    public $onNotUserAllowedAction = array();
 	
 	/**
 	 * The Dao that will return all rights for a user.
@@ -163,11 +163,11 @@ class MoufRightService implements RightsServiceInterface, AuthenticationListener
 		return false;
 	}
         
-        private function runNotAllowedAction(){
-            foreach($this->onNotUserAllowedAction as $action){
-                $action->run();
-            }
+    private function runNotAllowedAction(){
+        foreach($this->onNotUserAllowedAction as $action){
+            $action->run();
         }
+    }
 	
 	/**
 	 * Returns true if the user whose id is $user_id has the $right.
@@ -227,12 +227,12 @@ class MoufRightService implements RightsServiceInterface, AuthenticationListener
 	 */
 	public function redirectNotAuthorized($right, $scope = null) {
 		if (!$this->isAllowed($right, $scope)) {
-                        $this->runNotAllowedAction();
 			if ($scope == null) {
 				$this->log->info("User ".$this->userService->getUserLogin()." was denied access because he does not have the right ".$right.".");
 			} else {
 				$this->log->info("User ".$this->userService->getUserLogin()." was denied access because he does not have the right ".$right." on the required scope.");
 			}
+            $this->runNotAllowedAction();
 			header("Location:".ROOT_URL.$this->errorPageUrl."?".$this->redirectParameter."=".urlencode($_SERVER['REQUEST_URI']));
 			exit;
 		}
