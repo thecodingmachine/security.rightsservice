@@ -263,11 +263,12 @@ If you plan to use the RightsService package, it is usually a good idea to creat
 	 * @return MoufValidatorResult
 	 */
 	public function validateInstance() {
-		if ($this->rightsDao == null) {
-			return new MoufValidatorResult(MoufValidatorResult::ERROR, "You must associate a rightsDao to the rightsService.");
+		$instanceName = MoufManager::getMoufManager()->findInstanceName($this);
+
+		if ($this->rightsDao == null && get_class($this) === 'Mouf\\Security\\RightsService\\MoufRightService') {
+			return new MoufValidatorResult(MoufValidatorResult::ERROR, "<strong>Rights service:</strong> You must associate a rightsDao to the <a href='".MOUF_URL."ajaxinstance/?name=".urlencode($instanceName)."'>{$instanceName}</a> instance.");
 		} else {
-			return new MoufValidatorResult(MoufValidatorResult::SUCCESS, "rightsDao found in rightsService.");
+			return new MoufValidatorResult(MoufValidatorResult::SUCCESS, "<strong>Rights service:</strong> rightsDao correctly binded in '{$instanceName}'.");
 		}
 	}
 }
-?>
