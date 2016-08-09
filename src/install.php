@@ -31,7 +31,9 @@ if (!$moufManager->instanceExists("rightsService")) {
 		$userService->getProperty('authenticationListeners')->setValue($prevValues);
 		
 	}
-	
+
+    $rightsService->getProperty('sessionPrefix')->setValue('SECRET')->setOrigin('config');
+
 }
 
 // Let's rewrite the MoufComponents.php file to save the component
