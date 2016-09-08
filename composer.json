@@ -23,6 +23,9 @@
             "Mouf\\Security\\RightsService": "src/"
         }
     },
+    "suggest": {
+        "twig/twig": "This package proposes a Twig 'is_allowed' function to check rights."
+    },
     "extra": {
     	"mouf": {
 	    	"install": [
