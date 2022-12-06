@@ -13,8 +13,8 @@
         }
     ],
     "require": {
-    	"php": ">=5.3.0",
-        "mouf/security.userservice": "2.*",
+    	"php": "^8",
+        "mouf/security.userservice": "^3.0",
         "mouf/mouf-validators-interface": "~2.0",
         "mouf/utils.constants.secret": "^1.0"
     },
@@ -35,5 +35,11 @@
 	    		}
 	    	]
     	}
+    },
+    "config": {
+        "allow-plugins": {
+            "mindplay/composer-locator": true,
+            "mouf/mouf-installer": true
+        }
     }
 }
